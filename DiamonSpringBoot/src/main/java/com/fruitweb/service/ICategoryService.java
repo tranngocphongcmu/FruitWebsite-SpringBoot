@@ -15,6 +15,13 @@ public interface ICategoryService {
 	Category findCategoryById(Long id);
 
 	Page<Category> getAllCategoryPaging(Pageable pageable);
+
+	void saveAndUpdate(Category category);
+
+	Category getById(Long id);
+
+	void deleteById(Long id);
+
 	
 	
 	

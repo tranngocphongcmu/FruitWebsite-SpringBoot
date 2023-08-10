@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -34,6 +34,42 @@ public class CategoryAdminController {
         modelAndView.addObject("page", pageNumber);
         modelAndView.addObject("categoryAdmin",categories);
         modelAndView.setViewName("/admin/category");
+        return modelAndView;
+    }
+
+    @GetMapping("/addCategory")
+    public ModelAndView viewFormAddCategoryAdmin(@ModelAttribute Category category){
+        modelAndView.setViewName("/admin/Addcategory");
+        modelAndView.addObject("categoryAdmin", new Category());
+        return modelAndView;
+    }
+
+    @PostMapping("/addCategory")
+    public ModelAndView addCategoryAdmin(@ModelAttribute("categoryAdmin") Category category){
+        category = categoryService.save(category);
+        modelAndView.setViewName("redirect:/category");
+        return modelAndView;
+    }
+
+    @GetMapping("/updateCategory")
+    public  ModelAndView viewUpdateCategory(){
+        modelAndView.setViewName("/admin/UpadateCategory");
+        return modelAndView;
+    }
+
+    @GetMapping("/updateCategory/{id}")
+    public  ModelAndView editCategoryAdmin(@PathVariable Long id){
+        ModelAndView modelAndView1 = new ModelAndView("update_category");
+        Category category = categoryService.getById(id);
+        modelAndView.addObject("updateCategory",category);
+        return modelAndView;
+    }
+
+
+    @GetMapping("/deleteBook/{id}")
+    public ModelAndView deleteBook(@PathVariable("id") Long id) {
+        categoryService.deleteById(id);
+        modelAndView.setViewName("redirect:/category");
         return modelAndView;
     }
 }
