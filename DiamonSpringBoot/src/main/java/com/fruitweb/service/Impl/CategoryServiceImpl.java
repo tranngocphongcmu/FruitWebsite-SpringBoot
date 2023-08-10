@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fruitweb.model.Category;
@@ -18,7 +20,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	@Override
 	public Category save(Category category) {
-		return null;
+		return categoryReponsitory.save(category);
 	}
 
 
@@ -39,8 +41,10 @@ public class CategoryServiceImpl implements ICategoryService {
 		return categoryReponsitory.getCategoryById(id);
 	}
 
-
-
+	@Override
+	public Page<Category> getAllCategoryPaging(Pageable pageable) {
+		return categoryReponsitory.findAll(pageable);
+	}
 
 
 }

@@ -34,41 +34,6 @@ public class ProductController extends  BaseController {
 	@Autowired
 	MenuServiceImpl _menuServiceImpl;
 
-
-
-//	@GetMapping("/products")
-//	public Page<Product> findAll(
-//			@RequestParam Optional<String> name,
-//			@RequestParam Optional<Integer> page,
-//			@RequestParam Optional<String> sortBy) {
-//		// Sort by added
-//		return productServiceImpl.findByName(name.orElse("_"),
-//				new PageRequest(
-//						page.orElse(0), 5,
-//						Sort.Direction.ASC, sortBy.orElse("id")));
-//	}
-
-		@GetMapping("/parameters/products")
-	public String getAllPages(Model model){
-		model.addAttribute("findall",productServiceImpl.getAllProducts());
-		return getOnePage(model,1);
-	}
-	
-
-	@GetMapping("/parameters/product/{pageNumber}")
-	public  String getOnePage(Model model,@PathVariable("pageNumber") int currentPage){
-		Page<Product> page = productServiceImpl.getAllProductsFindPage(currentPage);
-		int totalPages = page.getTotalPages();
-		Long totalItems = page.getTotalElements();
-		List<Product> products = page.getContent();
-
-		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("totalPages",totalPages);
-		model.addAttribute("totalItems",totalItems);
-		model.addAttribute("productsPage",products);
-		return "index";
-	}
-
 	
 	@RequestMapping("/san-pham/{id}")
     public ModelAndView getProductByCategory(@PathVariable Long id, @RequestParam("page") Optional<Integer> page){
