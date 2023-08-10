@@ -6,6 +6,7 @@ import com.fruitweb.service.Impl.CartItemImpl;
 import com.fruitweb.service.Impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +28,14 @@ public class CartController  extends BaseController {
     private ProductServiceImpl productService;
 
 
-    @RequestMapping(value = "/cart",method = RequestMethod.GET)
+//    @RequestMapping(value = "/cart",method = RequestMethod.GET)
+    @GetMapping(value = "/cart")
     public String viewCart(){
         return "cart";
     }
 
-    @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/buy/{id}")
     public  String buy(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request){
         List<CartItemDto> cart = new ArrayList<CartItemDto>();
         if (session.getAttribute("cart") == null){
@@ -57,7 +60,8 @@ public class CartController  extends BaseController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/update/{id}")
     public  String update(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request){
             List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
             int index = this.exists(id, cart);
@@ -67,7 +71,8 @@ public class CartController  extends BaseController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/remove/{id}")
     public String remove(@PathVariable("id") Long id, HttpSession session,HttpServletRequest request) {
         List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
         int index = this.exists(id, cart);

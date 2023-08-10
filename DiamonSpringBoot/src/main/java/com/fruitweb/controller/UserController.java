@@ -16,7 +16,8 @@ public class UserController extends BaseController {
     @Autowired
     private UserServiceImpl userService;
 
-    @RequestMapping(value = "/dang-ky",method = RequestMethod.GET)
+//    @RequestMapping(value = "/dang-ky",method = RequestMethod.GET)
+    @GetMapping(value = "/dang-ky")
     public ModelAndView dangKy(){
         _mvShare.setViewName("/register");
         _mvShare.addObject("user",new User()); //
@@ -24,7 +25,8 @@ public class UserController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/dang-ky",method = RequestMethod.POST)
+//    @RequestMapping(value = "/dang-ky",method = RequestMethod.POST)
+    @PostMapping("/dang-ky")
     public ModelAndView createAcc(@ModelAttribute("user") User  user){
         int  count = userService.saveOrUpdate(user);
         if(count > 0){
@@ -38,7 +40,8 @@ public class UserController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/dang-nhap",method = RequestMethod.POST)
+//    @RequestMapping(value = "/dang-nhap",method = RequestMethod.POST)
+    @PostMapping(value = "/dang-nhap")
     public ModelAndView login(@ModelAttribute("user") User  user, HttpSession session){
         user = userService.checkAccount(user);
         if (user != null){
@@ -51,7 +54,8 @@ public class UserController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/dang-nhap",method = RequestMethod.GET)
+//    @RequestMapping(value = "/dang-nhap",method = RequestMethod.GET)
+    @GetMapping(value = "/dang-nhap")
     public ModelAndView dangNhap(){
         _mvShare.setViewName("/login");
         _mvShare.addObject("user",new User());
@@ -59,7 +63,8 @@ public class UserController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/dang-xuat", method = RequestMethod.GET)
+//    @RequestMapping(value = "/dang-xuat", method = RequestMethod.GET)
+    @GetMapping("/dang-xuat")
     public ModelAndView logout(HttpSession session, HttpServletRequest request) {
         session.removeAttribute("logininfo");
         _mvShare.setViewName("index");
