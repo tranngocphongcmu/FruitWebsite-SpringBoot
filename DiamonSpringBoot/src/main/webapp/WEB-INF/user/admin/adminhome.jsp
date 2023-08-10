@@ -76,9 +76,9 @@
 			 <%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			 <div class="container-fluid">
 				 <div class="modal-footer">
-					 <button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button>
-					 <button class="btn btn-primary" type="button" data-dismiss="modal">Update</button>
-					 <button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button>
+					 <a><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a>
+					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a>
+					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a>
 					 <a class="btn btn-primary" href="login.html">Logout</a>
 				 </div>
 			 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -129,14 +129,6 @@
 
  </div>
 
- <!-- Footer -->
- <footer class="sticky-footer bg-white">
-	 <div class="container my-auto">
-		 <div class="copyright text-center my-auto">
-			 <span>Copyright &copy; Your Website 2021</span>
-		 </div>
-	 </div>
- </footer>
  <div class="container my-auto">
 		 <div class="center">
 

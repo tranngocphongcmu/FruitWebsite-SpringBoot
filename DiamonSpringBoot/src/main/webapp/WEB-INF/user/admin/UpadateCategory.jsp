@@ -29,33 +29,68 @@
 	<link href="<c:url  value="/assets/admin/css/sb-admin-2.min.css"/>" rel="stylesheet">
 
 	<style>
-		.center {
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background-color: black;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		/* Add padding to containers */
+		.container {
+			padding: 16px;
+			background-color: white;
+		}
+
+		/* Full-width input fields */
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 15px;
+			margin: 5px 0 22px 0;
+			display: inline-block;
+			border: none;
+			background: #f1f1f1;
+		}
+
+		input[type=text]:focus, input[type=password]:focus {
+			background-color: #ddd;
+			outline: none;
+		}
+
+		/* Overwrite default styles of hr */
+		hr {
+			border: 1px solid #f1f1f1;
+			margin-bottom: 25px;
+		}
+
+		/* Set a style for the submit button */
+		.registerbtn {
+			background-color: #04AA6D;
+			color: white;
+			padding: 16px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+			opacity: 0.9;
+		}
+
+		.registerbtn:hover {
+			opacity: 1;
+		}
+
+		/* Add a blue text color to links */
+		a {
+			color: dodgerblue;
+		}
+
+		/* Set a grey background color and center the text of the "sign in" section */
+		.signin {
+			background-color: #f1f1f1;
 			text-align: center;
 		}
-
-		.pagination {
-			display: inline-block;
-		}
-
-		.pagination a {
-			color: black;
-			float: left;
-			padding: 8px 16px;
-			text-decoration: none;
-			transition: background-color .3s;
-			border: 1px solid #ddd;
-			margin: 0 4px;
-		}
-
-		.pagination a.active {
-			background-color: #4CAF50;
-			color: white;
-			border: 1px solid #4CAF50;
-		}
-
-		.pagination a:hover:not(.active) {background-color: #ddd;}
-
-
 	</style>
 
 </head>
@@ -78,52 +113,26 @@
 			<%--HEADER ADMIN--%>
 			<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			<!-- Page Heading -->
-			<div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+			<form action="addCategory" method="post">
 				<div class="container">
-					<h2>Category Table</h2>
-					<table class="table table-bordered">
-						<thead>
-						<tr>
-							<th>Category_Id</th>
-							<th>name</th>
-						</tr>
-						</thead>
-						<tbody>
-						<c:forEach var="item" items="${categoryAdmin.content}">
-							<tr>
-								<td>${item.id}</td>
-								<td>${item.name}</td>
-								<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
-								<td><a href="/updateCategory"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
-								<td><a href="/deleteBook/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
+					<h1>Update Category</h1>
+					<hr>
 
+					<label for="id"><b>Category_ID</b></label>
+					<input type="text" placeholder="Enter Category_ID" name="id" id="id" required>
+
+					<label for="name"><b>Category_Name</b></label>
+					<input type="text" placeholder="Enter Category_Name" name="name" id="name" required>
+					<hr>
+
+					<button type="submit" class="registerbtn">Update Category</button>
 				</div>
-			</div>
-		</div>
-		<div class="container my-auto">
-			<div class="center">
 
-				<div class="pagination">
-
-					<c:if test="${categoryAdmin.totalPages > 1}">
-						<ul>
-							<c:forEach var="i" begin="1" end="${categoryAdmin.totalPages}">
-								<a <c:if test="${page eq i-1}">class="active"</c:if> href="?page=${i}">${i}</a>
-							</c:forEach>
-						</ul>
-					</c:if>
-
-				</div>
-			</div>
+			</form>
 		</div>
 
 	</div>
-	</div>
-
 </div>
 
 

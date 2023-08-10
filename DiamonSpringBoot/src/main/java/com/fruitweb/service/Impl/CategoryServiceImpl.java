@@ -46,5 +46,26 @@ public class CategoryServiceImpl implements ICategoryService {
 		return categoryReponsitory.findAll(pageable);
 	}
 
+	@Override
+	public void saveAndUpdate(Category category) {
+		if(category.getId() == null){
+			categoryReponsitory.save(category);
+		}else{
+			Category category1 =  categoryReponsitory.findById(category.getId()).get();
+			category1.setName(category.getName());
+			categoryReponsitory.save(category1);
+		}
+	}
+
+	@Override
+	public Category getById(Long id) {
+		return categoryReponsitory.findById(id).get();
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		 categoryReponsitory.deleteById(id);
+	}
+
 
 }
