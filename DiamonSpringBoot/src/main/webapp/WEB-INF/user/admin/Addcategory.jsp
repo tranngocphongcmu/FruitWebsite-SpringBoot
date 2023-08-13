@@ -114,7 +114,7 @@
 			<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			<!-- Page Heading -->
 
-			<form action="addCategory" method="post"  modelAttribute="categoryAdmin">
+			<form action="addCategory" method="post"  modelAttribute="categoryAdmin" >
 				<div class="container">
 					<h1>Add Category</h1>
 					<hr>

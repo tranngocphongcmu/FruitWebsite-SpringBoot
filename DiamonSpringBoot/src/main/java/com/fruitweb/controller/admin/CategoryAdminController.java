@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -51,17 +52,21 @@ public class CategoryAdminController {
         return modelAndView;
     }
 
-    @GetMapping("/updateCategory")
-    public  ModelAndView viewUpdateCategory(){
+    @GetMapping("/updateCategory/{id}")
+    public  ModelAndView viewUpdateCategory(@PathVariable Long id){
+        Category category = categoryService.getById(id);
+        modelAndView.addObject("update",category);
         modelAndView.setViewName("/admin/UpadateCategory");
         return modelAndView;
     }
 
-    @GetMapping("/updateCategory/{id}")
-    public  ModelAndView editCategoryAdmin(@PathVariable Long id){
-        ModelAndView modelAndView1 = new ModelAndView("update_category");
-        Category category = categoryService.getById(id);
-        modelAndView.addObject("updateCategory",category);
+    @PostMapping("/updateCategory/{id}")
+    public  ModelAndView editCategoryAdmin(@PathVariable Long id,@ModelAttribute("updatecategoryAdmin") Category category){
+//        ModelAndView modelAndView1 = new ModelAndView("update_category");
+//        category = categoryService.getById(id);
+            category = categoryService.save(category);
+//        modelAndView.addObject("updateCategory",category);
+        modelAndView.setViewName("redirect:/category");
         return modelAndView;
     }
 
@@ -70,6 +75,16 @@ public class CategoryAdminController {
     public ModelAndView deleteBook(@PathVariable("id") Long id) {
         categoryService.deleteById(id);
         modelAndView.setViewName("redirect:/category");
+        return modelAndView;
+    }
+
+    @GetMapping("/getSingleCategory/{id}")
+    public  ModelAndView getSingle(@PathVariable Long id, HttpSession session){
+        Category findByID = categoryService.getById(id);
+        Category category = findByID;
+        session.setAttribute("category",category);
+//        modelAndView.addObject("singlecategory",category);
+        modelAndView.setViewName("/admin/singlecategory");
         return modelAndView;
     }
 }

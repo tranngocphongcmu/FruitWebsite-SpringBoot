@@ -114,16 +114,17 @@
 			<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			<!-- Page Heading -->
 
-			<form action="addCategory" method="post">
+			<form action="/updateCategory/${update.id}" method="post"  modelAttribute = "updatecategoryAdmin" >
 				<div class="container">
 					<h1>Update Category</h1>
 					<hr>
 
 					<label for="id"><b>Category_ID</b></label>
-					<input type="text" placeholder="Enter Category_ID" name="id" id="id" required>
+
+					<input type="text" value="${update.id}"  readonly="readonly" placeholder="" name="id" id="id" required>
 
 					<label for="name"><b>Category_Name</b></label>
-					<input type="text" placeholder="Enter Category_Name" name="name" id="name" required>
+					<input type="text" value="${update.name}" placeholder="Enter Category_Name" name="name" id="name" required>
 					<hr>
 
 					<button type="submit" class="registerbtn">Update Category</button>

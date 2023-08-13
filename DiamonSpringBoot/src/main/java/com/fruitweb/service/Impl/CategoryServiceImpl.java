@@ -54,6 +54,7 @@ public class CategoryServiceImpl implements ICategoryService {
 			Category category1 =  categoryReponsitory.findById(category.getId()).get();
 			category1.setName(category.getName());
 			categoryReponsitory.save(category1);
+
 		}
 	}
 

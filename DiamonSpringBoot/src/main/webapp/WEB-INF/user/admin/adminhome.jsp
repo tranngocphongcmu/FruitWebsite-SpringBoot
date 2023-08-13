@@ -79,6 +79,7 @@
 					 <a><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a>
 					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a>
 					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a>
+					 <a"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a>
 					 <a class="btn btn-primary" href="login.html">Logout</a>
 				 </div>
 			 <div class="d-sm-flex align-items-center justify-content-between mb-4">
