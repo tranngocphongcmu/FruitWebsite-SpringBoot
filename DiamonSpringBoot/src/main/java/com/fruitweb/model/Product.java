@@ -2,19 +2,12 @@ package com.fruitweb.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -42,5 +35,18 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<BillDetail> billDetails;
+
+    public Product(Long id, String name, int currentQuantity, double costPrice, double salePrice, MultipartFile image) {
+    }
+
+    @Transient
+    public String getImageImagePath(){
+        if (image == null){
+            return null;
+        }
+        return "/productAdmin-image/" + id + "/" + image;
+    }
+
+
 
 }

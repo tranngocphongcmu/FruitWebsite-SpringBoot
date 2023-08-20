@@ -8,8 +8,12 @@ import org.springframework.data.domain.Pageable;
 
 import com.fruitweb.model.Category;
 import com.fruitweb.model.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IProductService {
+
+//	Product saveProductToDB(Product product, MultipartFile file);
+
 
 	Page<Product> findByName(String name, Pageable pageable);
 
@@ -27,13 +31,24 @@ public interface IProductService {
 
 	List<Product> getListProductByCategoryId(Long id);
 
-	Product getProductById(Long id);
+
 
 	Optional<Product> findById(Long id);
 
 	List<Product> findProductsWithSorting(String field);
 	Page<Product> findProductsWithPagination(int offset,int pageSize);
 	Page<Product> findProductsWithPaginationAndSorting(int offset,int pageSize,String field,String key);
+	Product getProductById(Long id);
+
+//	hoanf chinh
+
+	Product saveProduct(Product product);
+	void deleteProductById(Long id);
+
+	Product getProductID(Long id);
+
+	List<Product> getAllProduct(String keyWord);
+	Page<Product> findPaginated(int pageNo,int pageSize,String sortField,String sortDir);
 
 
 
