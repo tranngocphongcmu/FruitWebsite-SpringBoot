@@ -15,6 +15,11 @@ import com.fruitweb.model.Product;
 public interface ProductReponsitory extends JpaRepository<Product, Long> {
 
 
+//	@Query("SELECT Product FROM Product product  WHERE concat(product.id,product.name,product.costPrice) like %?1%")
+//	List<Product> searchProductByKeyWord(String keyWord);
+	Product findProductsByName(String productName);
+
+
 	@Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
 	Page<Product> searchProductByName(String searchKey, Pageable pageable);
 

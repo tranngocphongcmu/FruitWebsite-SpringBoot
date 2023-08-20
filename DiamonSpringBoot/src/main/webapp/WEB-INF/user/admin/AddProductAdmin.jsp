@@ -114,20 +114,46 @@
 			<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			<!-- Page Heading -->
 
-			<form action="/updateCategory/${update.id}" method="post"  modelAttribute = "updatecategoryAdmin" >
+			<form action="/saveProduct" method="post"  modelAttribute="productAdmin" enctype="multipart/form-data" >
 				<div class="container">
-					<h1>Update Category</h1>
+					<h1>Add Product</h1>
 					<hr>
 
-					<label for="id"><b>Category_ID</b></label>
+<%--					<label for="id"><b>Product_ID</b></label>--%>
+<%--					<input type="text" placeholder="Enter Product_ID" name="id" id="id" required>--%>
 
-					<input type="text" value="${update.id}"  readonly="readonly" placeholder="" name="id" id="id" required>
-
-					<label for="name"><b>Category_Name</b></label>
-					<input type="text" value="${update.name}" placeholder="Enter Category_Name" name="name" id="name" required>
+					<label for="name"><b>Product_Name</b></label>
+					<input type="text" placeholder="Enter Product_Name" name="name" id="name" required>
 					<hr>
 
-					<button type="submit" class="registerbtn">Update Category</button>
+					<label for="currentQuantity"><b>currentQuantity</b></label>
+					<input type="text" placeholder="Enter currentQuantity" name="currentQuantity" id="currentQuantity" required>
+
+					<hr>
+
+					<label for="costPrice"><b>costPrice</b></label>
+					<input type="text" placeholder="Enter costPrice" name="costPrice" id="costPrice" required>
+
+					<hr>
+
+					<label for="salePrice"><b>costPrice</b></label>
+					<input type="text" placeholder="Enter salePrice" name="salePrice" id="salePrice" required>
+					<hr>
+
+					<select id="cars" name="category_id" required>
+					<c:forEach var="item" items="${listCategory}">
+
+							<option value="${item.id}" >${item.name}</option>
+
+
+					</c:forEach>
+						</select>
+
+
+					<input type="file" name="file"  />
+
+
+					<button type="submit" class="registerbtn" >Add Product</button>
 				</div>
 
 			</form>
@@ -135,6 +161,9 @@
 
 	</div>
 </div>
+
+</body>
+
 
 
 
@@ -159,37 +188,4 @@
 </body>
 
 </html>
-
-<%--<body>--%>
-<%--<div id="content-wrapper" class="d-flex flex-column">--%>
-
-<%--	<!-- Main Content -->--%>
-<%--	<div id="content">--%>
-
-<%--		<!-- Topbar -->--%>
-<%--		&lt;%&ndash;HEADER ADMIN&ndash;%&gt;--%>
-<%--		<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>--%>
-<%--	</div>--%>
-<%--	<div class="container">--%>
-<%--		<h2>Category Table</h2>--%>
-<%--		<table class="table table-bordered">--%>
-<%--			<thead>--%>
-<%--			<tr>--%>
-<%--				<th>Category_Id</th>--%>
-<%--				<th>name</th>--%>
-<%--			</tr>--%>
-<%--			</thead>--%>
-<%--			<tbody>--%>
-<%--			<c:forEach var="item" items="${categoryAdmin.content}">--%>
-<%--				<tr>--%>
-<%--					<td>${item.id}</td>--%>
-<%--					<td>${item.name}</td>--%>
-<%--				</tr>--%>
-<%--			</c:forEach>--%>
-<%--			</tbody>--%>
-<%--		</table>--%>
-
-<%--	</div>--%>
-<%--</div>--%>
-
 

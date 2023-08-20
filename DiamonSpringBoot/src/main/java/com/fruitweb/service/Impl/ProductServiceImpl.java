@@ -15,6 +15,8 @@ import com.fruitweb.model.Category;
 import com.fruitweb.model.Product;
 import com.fruitweb.reponsitory.ProductReponsitory;
 import com.fruitweb.service.IProductService;
+import org.springframework.web.multipart.MultipartFile;
+
 @Service
 public class ProductServiceImpl implements IProductService {
 
@@ -22,6 +24,28 @@ public class ProductServiceImpl implements IProductService {
 	
 	@Autowired
 	ProductReponsitory productReponsitory;
+
+
+//	@Override
+//	public Product saveProductToDB(Product product, MultipartFile file) {
+//		Product p = new Product();
+//		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//		if(fileName.contains(".."))
+//		{
+//			System.out.println("not a a valid file");
+//		}
+//		try {
+//			p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		p.setDescription(description);
+//
+//		p.setName(name);
+//		p.setPrice(price);
+//
+//		productRepo.save(p);
+//	}
 
 	@Override
 	public Page<Product> findByName(String name, Pageable pageable) {
@@ -71,10 +95,7 @@ public class ProductServiceImpl implements IProductService {
 		return productReponsitory.getListProductByCategoryId(id);
 	}
 
-	@Override
-	public Product getProductById(Long id) {
-		return productReponsitory.findById(id).get();
-	}
+
 
 	@Override
 	public Optional<Product> findById(Long id) {
@@ -103,8 +124,54 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 
+	//hoan chinh
+
+	@Override
+	public Product getProductById(Long id) {
+		return productReponsitory.findById(id).get();
+	}
 
 
+	@Override
+	public Product saveProduct(Product product) {
+		return productReponsitory.save(product);
+	}
+
+
+	@Override
+	public void deleteProductById(Long id) {
+		productReponsitory.deleteById(id);
+	}
+
+	@Override
+	public Product getProductID(Long id) {
+
+		Optional<Product> optional = productReponsitory.findById(id);
+		Product product = null;
+		if (optional.isPresent()){
+			product = optional.get();
+		}else {
+			throw new RuntimeException("Product not found for id : "+ id);
+		}
+		return product;
+	}
+
+	@Override
+	public List<Product> getAllProduct(String keyWord) {
+		if (keyWord != null){
+			return productReponsitory.findAll();
+		}else {
+			return productReponsitory.findAll();
+		}
+	}
+
+	@Override
+	public Page<Product> findPaginated(int pageNo, int pageSize, String sortField, String sortDir) {
+
+		Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending(): Sort.by(sortField).descending();
+		Pageable pageable = PageRequest.of(pageNo - 1 ,pageSize,sort);
+		return productReponsitory.findAll(pageable);
+	}
 
 //	@Override
 //	public List<Product> findAllByPrice(double costPrice, Pageable pageable) {

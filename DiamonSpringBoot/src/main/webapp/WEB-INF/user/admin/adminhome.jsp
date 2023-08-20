@@ -76,9 +76,7 @@
 			 <%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			 <div class="container-fluid">
 				 <div class="modal-footer">
-					 <a><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a>
-					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a>
-					 <a><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a>
+					 <a href="/addProduct"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a>
 					 <a class="btn btn-primary" href="login.html">Logout</a>
 				 </div>
 			 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -87,25 +85,33 @@
 					 <table class="table table-bordered">
 						 <thead>
 						 <tr>
-							 <th>Product_Id</th>
-							 <th>Cost_price</th>
-							 <th>Current_Quantity</th>
+							 <th>STT</th>
+							 <th>Cost Price</th>
+							 <th>Current Quantity</th>
 							 <th>Image</th>
 							 <th>Mame</th>
-							 <th>Sale_price</th>
-							 <th>Category_Id</th>
+							 <th>Sale price</th>
+							 <th>Category Name</th>
 						 </tr>
 						 </thead>
 						 <tbody>
-						 <c:forEach var="item" items="${productsAdmin.content}">
+						 <c:forEach var="item,index" items="${productsAdmin.content}" varStatus="loop">
 							 <tr>
-								 <td>${item.id}</td>
+								 <td>${loop.index + 1}</td>
 								 <td>${item.costPrice}</td>
 								 <td>${item.currentQuantity}</td>
-								 <td><img src="<c:url value="/assets/img/product/${item.image}"/>" alt=""></td>
+								 <td><img src="<c:url value="/resources/uploads/${item.image}"/>" width="100" height="60"  alt="No pic"></td>
+
 								 <td>${item.name}</td>
 								 <td>${item.salePrice}</td>
-								 <td>${item.category.id}</td>
+								 <td>${item.category.name}</td>
+
+								 <td><a href="/showFormForUpdate/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
+								 <td><a href="/deleteProduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
+								 <td><a><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
+
+
+
 							 </tr>
 						 </c:forEach>
 						 </tbody>

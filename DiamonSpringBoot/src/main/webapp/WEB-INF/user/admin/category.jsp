@@ -81,6 +81,7 @@
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
 				<div class="container">
 					<h2>Category Table</h2>
+					<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
 					<table class="table table-bordered">
 						<thead>
 						<tr>
@@ -93,9 +94,9 @@
 							<tr>
 								<td>${item.id}</td>
 								<td>${item.name}</td>
-								<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
-								<td><a href="/updateCategory"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
+								<td><a href="/updateCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
 								<td><a href="/deleteBook/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
+								<td><a href="/getSingleCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
 							</tr>
 						</c:forEach>
 						</tbody>
