@@ -22,6 +22,9 @@ public interface ICategoryService {
 
 	void deleteById(Long id);
 
+	Page<Category> searchCategoriesByName(String searchKey, Pageable pageable);
+
+	List<Category> getByKeyword(String keyword);
 	
 	
 	

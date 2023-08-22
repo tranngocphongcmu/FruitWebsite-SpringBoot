@@ -96,7 +96,7 @@
 							</tr>
 						</tbody>
 					</table>
-
+					<td><a href="/category"><button class="btn btn-primary"  type="button" data-dismiss="modal">Back To Category</button></a></td>
 				</div>
 			</div>
 		</div>
