@@ -1,6 +1,7 @@
 package com.fruitweb.controller.admin;
 
 import com.fruitweb.model.Category;
+import com.fruitweb.model.Product;
 import com.fruitweb.service.Impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -87,4 +89,35 @@ public class CategoryAdminController {
         modelAndView.setViewName("/admin/singlecategory");
         return modelAndView;
     }
+
+    @GetMapping("/searchcategory/{keySearch}")
+    public ModelAndView searchPagingCategory(@RequestParam String keySearch, @RequestParam("page") Optional<Integer> page){
+        int pageNumber = page.orElse(0);
+        if(pageNumber != 0) {
+            pageNumber = pageNumber - 1;
+        }
+        Pageable pageable = PageRequest.of(pageNumber, 3);
+        Page<Category> categories = categoryService.searchCategoriesByName(keySearch,pageable);
+        modelAndView.addObject("categories", categories);
+        modelAndView.addObject("page", pageNumber);
+        modelAndView.addObject("searchingCategory", categories);
+        modelAndView.addObject("keySearch", keySearch);
+        modelAndView.setViewName("/admin/searchcategory");
+        return modelAndView;
+
+    }
+
+    @RequestMapping("/searchct")
+    public ModelAndView home(Category category, String keyword) {
+        if(keyword!=null) {
+            List<Category> list = categoryService.getByKeyword(keyword);
+            modelAndView.addObject("list", list);
+        }else {
+            List<Category> list = categoryService.getAllCategory();
+            modelAndView.addObject("list", list);}
+        modelAndView.setViewName("/admin/searchcategory");
+        return modelAndView;
+    }
+
+
 }

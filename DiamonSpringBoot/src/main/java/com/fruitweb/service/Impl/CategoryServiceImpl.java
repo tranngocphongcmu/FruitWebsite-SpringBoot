@@ -68,5 +68,15 @@ public class CategoryServiceImpl implements ICategoryService {
 		 categoryReponsitory.deleteById(id);
 	}
 
+	@Override
+	public Page<Category> searchCategoriesByName(String searchKey, Pageable pageable) {
+		return categoryReponsitory.searchCategoriesByName(searchKey,pageable);
+	}
+
+	@Override
+	public List<Category> getByKeyword(String keyword) {
+		return categoryReponsitory.findByKeyword(keyword);
+	}
+
 
 }

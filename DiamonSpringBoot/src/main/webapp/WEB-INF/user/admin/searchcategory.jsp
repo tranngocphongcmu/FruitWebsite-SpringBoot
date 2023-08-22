@@ -82,14 +82,6 @@
 				<div class="container">
 					<h2>Category Table</h2>
 					<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
-<%--					<form action="/searchcategory/" class="navbar-search pull-left" method="get">--%>
-<%--						<input name="keySearch" value="${keySearch}" type="text" placeholder="Search" class="search-query span2">--%>
-<%--					</form>--%>
-					<form action="/searchct" method="get">
-						<input type="text" name="keyword" value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
-						<button type="submit" class="btn btn-info" >Search</button>
-						<button type="submit" class="btn btn-info" >Reset</button>
-					</form>
 					<table class="table table-bordered">
 						<thead>
 						<tr>
@@ -98,7 +90,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="item" items="${categoryAdmin.content}">
+						<c:forEach var="item" items="${list}">
 							<tr>
 								<td>${item.id}</td>
 								<td>${item.name}</td>
@@ -112,28 +104,14 @@
 
 				</div>
 			</div>
-		</div>
-		<div class="container my-auto">
-			<div class="center">
 
-				<div class="pagination">
-
-					<c:if test="${categoryAdmin.totalPages > 1}">
-						<ul>
-							<c:forEach var="i" begin="1" end="${categoryAdmin.totalPages}">
-								<a <c:if test="${page eq i-1}">class="active"</c:if> href="?page=${i}">${i}</a>
-							</c:forEach>
-						</ul>
-					</c:if>
-
-				</div>
-			</div>
 		</div>
 
 	</div>
 	</div>
 
 </div>
+
 
 
 
