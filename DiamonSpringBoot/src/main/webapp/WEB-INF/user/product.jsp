@@ -91,7 +91,7 @@ New Products
 							  <div class="thumbnail">
 								<a href="product_details.html" class="overlay"></a>
 								<a class="zoomTool" href="" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-								<a href="<c:url value="/chi-tiet-san-pham/${item.id}"/>"><img src="<c:url value="/assets/img/product/${item.image}"/>" alt=""></a>
+								<a href="<c:url value="/chi-tiet-san-pham/${item.id}"/>"><img src="<c:url value="/resources/uploads/${item.image}"/>" alt=""></a>
 								<div class="caption cntr">
 									<p>${item.name }</p>
 									<p><strong><fmt:formatNumber type="number" groupingUsed="true" value="${item.costPrice} " />₫</strong></p>

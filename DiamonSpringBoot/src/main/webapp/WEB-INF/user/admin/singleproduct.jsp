@@ -81,53 +81,37 @@
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
 				<div class="container">
 					<h2>Category Table</h2>
-					<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
-					<form action="/searchct" method="get">
-						<input type="text" name="keyword" value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
-						<button type="submit" class="btn btn-info" >Search</button>
-					</form>
 					<table class="table table-bordered">
 						<thead>
 						<tr>
-							<th>Category_Id</th>
-							<th>name</th>
+							<th>STT</th>
+							<th>Cost Price</th>
+							<th>Current Quantity</th>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Sale price</th>
+							<th>Category Name</th>
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="item" items="${categoryAdmin.content}">
 							<tr>
-								<td>${item.id}</td>
-								<td>${item.name}</td>
-								<td><a href="/updateCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
-								<td><a href="/deleteBook/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
-								<td><a href="/getSingleCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
+								<td>${id}</td>
+								<td>${product.costPrice}</td>
+								<td>${product.currentQuantity}</td>
+								<td><img src="<c:url value="/resources/uploads/${product.image}"/>" width="100" height="60"  alt="No pic"></td>
+								<td>${product.name}</td>
+								<td>${product.salePrice}</td>
+								<td>${product.category.name}</td>
+<%--								<td>${product.costPrice}</td>--%>
+
+
 							</tr>
-						</c:forEach>
 						</tbody>
 					</table>
-
+					<td><a href="/adminhome"><button class="btn btn-primary"  type="button" data-dismiss="modal">Back To Product</button></a></td>
 				</div>
 			</div>
 		</div>
-		<div class="container my-auto">
-			<div class="center">
-
-				<div class="pagination">
-
-					<c:if test="${categoryAdmin.totalPages > 1}">
-						<ul>
-							<c:forEach var="i" begin="1" end="${categoryAdmin.totalPages}">
-								<a <c:if test="${page eq i-1}">class="active"</c:if> href="?page=${i}">${i}</a>
-							</c:forEach>
-						</ul>
-					</c:if>
-
-				</div>
-			</div>
-		</div>
-
-	</div>
-	</div>
 
 </div>
 
@@ -154,37 +138,4 @@
 </body>
 
 </html>
-
-<%--<body>--%>
-<%--<div id="content-wrapper" class="d-flex flex-column">--%>
-
-<%--	<!-- Main Content -->--%>
-<%--	<div id="content">--%>
-
-<%--		<!-- Topbar -->--%>
-<%--		&lt;%&ndash;HEADER ADMIN&ndash;%&gt;--%>
-<%--		<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>--%>
-<%--	</div>--%>
-<%--	<div class="container">--%>
-<%--		<h2>Category Table</h2>--%>
-<%--		<table class="table table-bordered">--%>
-<%--			<thead>--%>
-<%--			<tr>--%>
-<%--				<th>Category_Id</th>--%>
-<%--				<th>name</th>--%>
-<%--			</tr>--%>
-<%--			</thead>--%>
-<%--			<tbody>--%>
-<%--			<c:forEach var="item" items="${categoryAdmin.content}">--%>
-<%--				<tr>--%>
-<%--					<td>${item.id}</td>--%>
-<%--					<td>${item.name}</td>--%>
-<%--				</tr>--%>
-<%--			</c:forEach>--%>
-<%--			</tbody>--%>
-<%--		</table>--%>
-
-<%--	</div>--%>
-<%--</div>--%>
-
 

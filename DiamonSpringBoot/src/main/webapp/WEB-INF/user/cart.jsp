@@ -60,7 +60,7 @@
 					<c:forEach var="item" items="${ sessionScope.cart }">
 						<c:set var="total" value="${total + item.quantity * item.product.costPrice}"></c:set>
 						<tr>
-							<td><img width="100" src="<c:url value="/assets/img/product/${ item.product.image}"/>" alt=""></td>
+							<td><img width="100" src="<c:url value="/resources/uploads/${ item.product.image}"/>" alt=""></td>
 							<td>${ item.product.name }</td>
 							<td><fmt:formatNumber type="number" groupingUsed="true" value="${ item.product.costPrice }"/> ₫</td>
 							<td>

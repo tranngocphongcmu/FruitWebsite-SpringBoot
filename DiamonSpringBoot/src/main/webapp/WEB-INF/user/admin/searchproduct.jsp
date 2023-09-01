@@ -80,27 +80,40 @@
 			<!-- Page Heading -->
 			<div class="d-sm-flex align-items-center justify-content-between mb-4">
 				<div class="container">
-					<h2>Category Table</h2>
+					<h2>Product Table</h2>
 					<td><a href="/addCategory"><button class="btn btn-primary"  type="button" data-dismiss="modal">Add</button></a></td>
-					<form action="/searchct" method="get">
-						<input type="text" name="keyword" value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
-						<button type="submit" class="btn btn-info" >Search</button>
-					</form>
+					<td><a href="/adminhome"><button class="btn btn-primary"  type="button" data-dismiss="modal">Back To Home</button></a></td>
 					<table class="table table-bordered">
 						<thead>
 						<tr>
-							<th>Category_Id</th>
-							<th>name</th>
+							<th>STT</th>
+							<th>Cost Price</th>
+							<th>Current Quantity</th>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Sale price</th>
+							<th>Category Name</th>
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="item" items="${categoryAdmin.content}">
+						<c:forEach  var="item" items="${listproduct}" >
 							<tr>
+									<%--								 <td>${loop.index + 1}</td>--%>
 								<td>${item.id}</td>
+								<td>${item.costPrice}</td>
+								<td>${item.currentQuantity}</td>
+								<td><img src="<c:url value="/resources/uploads/${item.image}"/>" width="100" height="60"  alt="No pic"></td>
+
 								<td>${item.name}</td>
-								<td><a href="/updateCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
-								<td><a href="/deleteBook/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
-								<td><a href="/getSingleCategory/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
+								<td>${item.salePrice}</td>
+								<td>${item.category.name}</td>
+
+								<td><a href="/updateProduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
+								<td><a href="/deleteProduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
+								<td><a href="/getsingleproduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
+
+
+
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -108,28 +121,14 @@
 
 				</div>
 			</div>
-		</div>
-		<div class="container my-auto">
-			<div class="center">
 
-				<div class="pagination">
-
-					<c:if test="${categoryAdmin.totalPages > 1}">
-						<ul>
-							<c:forEach var="i" begin="1" end="${categoryAdmin.totalPages}">
-								<a <c:if test="${page eq i-1}">class="active"</c:if> href="?page=${i}">${i}</a>
-							</c:forEach>
-						</ul>
-					</c:if>
-
-				</div>
-			</div>
 		</div>
 
 	</div>
 	</div>
 
 </div>
+
 
 
 

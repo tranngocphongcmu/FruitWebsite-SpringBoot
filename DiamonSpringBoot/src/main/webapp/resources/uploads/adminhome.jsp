@@ -82,10 +82,6 @@
 			 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 				 <div class="container">
 					 <h2>Product Table</h2>
-					 <form action="/searchproduct" method="get">
-						 <input type="text" name="keyword" value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
-						 <button type="submit" class="btn btn-info" >Search</button>
-					 </form>
 					 <table class="table table-bordered">
 						 <thead>
 						 <tr>
@@ -111,7 +107,7 @@
 								 <td>${item.salePrice}</td>
 								 <td>${item.category.name}</td>
 
-								 <td><a href="/updateProduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
+								 <td><a href="/showFormForUpdate/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Update</button></a></td>
 								 <td><a href="/deleteProduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">Delete</button></a></td>
 								 <td><a href="/getsingleproduct/${item.id}"><button class="btn btn-primary" type="button" data-dismiss="modal">View</button></a></td>
 

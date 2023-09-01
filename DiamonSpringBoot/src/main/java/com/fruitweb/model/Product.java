@@ -39,13 +39,6 @@ public class Product {
     public Product(Long id, String name, int currentQuantity, double costPrice, double salePrice, MultipartFile image) {
     }
 
-    @Transient
-    public String getImageImagePath(){
-        if (image == null){
-            return null;
-        }
-        return "/productAdmin-image/" + id + "/" + image;
-    }
 
 
 

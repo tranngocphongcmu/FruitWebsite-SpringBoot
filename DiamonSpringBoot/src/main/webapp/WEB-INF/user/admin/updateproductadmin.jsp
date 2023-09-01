@@ -114,49 +114,49 @@
 			<%@ include file="/WEB-INF/user/admin/headeradmin.jsp"  %>
 			<!-- Page Heading -->
 
-			<form action="/saveProduct" method="post"  modelAttribute="productAdmin" enctype="multipart/form-data" >
+			<form action="/updateProduct/${updateproduct.id}" method="post"  modelAttribute="updateproductadmin" enctype="multipart/form-data" >
 				<div class="container">
-					<h1>Add Product</h1>
+					<h1>Update Product</h1>
 					<hr>
 
 <%--					<label for="id"><b>Product_ID</b></label>--%>
-<%--					<input type="text" placeholder="Enter Product_ID" name="id" id="id" required>--%>
+<%--					<input type="text" value="${updateproduct.id}" placeholder="Enter Product_ID" name="id" id="id" required>--%>
 
 					<label for="name"><b>Product_Name</b></label>
-					<input type="text" placeholder="Enter Product_Name" name="name" id="name" required>
+					<input type="text" value="${updateproduct.name}" placeholder="Enter Product_Name" name="name" id="name" required>
 					<hr>
 
 					<label for="currentQuantity"><b>currentQuantity</b></label>
-					<input type="text" placeholder="Enter currentQuantity" name="currentQuantity" id="currentQuantity" required>
+					<input type="text" value="${updateproduct.currentQuantity}" placeholder="Enter currentQuantity" name="currentQuantity" id="currentQuantity" required>
 
 					<hr>
 
 					<label for="costPrice"><b>costPrice</b></label>
-					<input type="text" placeholder="Enter costPrice" name="costPrice" id="costPrice" required>
+					<input type="text" value="${updateproduct.costPrice}" placeholder="Enter costPrice" name="costPrice" id="costPrice" required>
 
 					<hr>
 
 					<label for="salePrice"><b>salePrice</b></label>
-					<input type="text" placeholder="Enter salePrice" name="salePrice" id="salePrice" required>
+					<input type="text" value="${updateproduct.salePrice}" placeholder="Enter salePrice" name="salePrice" id="salePrice" required>
 					<hr>
 
 
 					<label for="salePrice"><b>Category: </b></label>
 					<select id="cars" name="category_id" required>
-					<c:forEach var="item" items="${listCategory}">
+						<c:forEach var="item" items="${listCategory}">
 
 							<option value="${item.id}" >${item.name}</option>
 
 
-					</c:forEach>
-						</select>
+						</c:forEach>
+					</select>
 
 					<hr>
 					<label for="salePrice"><b>Image_Product: </b></label>
 					<input type="file" name="file"  />
 
 
-					<button type="submit" class="registerbtn" >Add Product</button>
+					<button type="submit" class="registerbtn" >Update Product</button>
 				</div>
 
 			</form>

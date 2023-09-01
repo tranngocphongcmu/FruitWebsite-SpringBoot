@@ -1,29 +1,22 @@
 package com.fruitweb.controller.admin;
 
-import com.fruitweb.dto.ProductDto;
 import com.fruitweb.model.Category;
 import com.fruitweb.model.Product;
 import com.fruitweb.service.Impl.CategoryServiceImpl;
 import com.fruitweb.service.Impl.ProductServiceImpl;
 import com.fruitweb.ultis.FileUtil;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +28,6 @@ public class ProductAdminController {
 
     @Autowired
     private CategoryServiceImpl categoryService;
-    public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/webapp/assets/img/product";
     private ModelAndView modelAndView = new ModelAndView();
 
     @GetMapping("/addProduct")
@@ -69,6 +61,34 @@ public class ProductAdminController {
         return modelAndView;
     }
 
+    @GetMapping("/updateProduct/{id}")
+    public  ModelAndView viewUpdateCategory(@PathVariable Long id){
+        Product product = productService.findById(id).get();
+        modelAndView.addObject("updateproduct",product);
+        modelAndView.setViewName("/admin/updateproductadmin");
+        return modelAndView;
+    }
+
+    @PostMapping("/updateProduct/{id}")
+    public  ModelAndView editCategoryAdmin(@PathVariable Long id,
+                                           @ModelAttribute("updateproductadmin") Product  product,
+                                           HttpServletRequest request,
+                                           @RequestParam("file")MultipartFile multipartFile,
+                                           Long category_id){
+        Category category = categoryService.findCategoryById(category_id);
+        String fileName = "";
+        try {
+            fileName = FileUtil.upload(multipartFile,request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        product.setImage(fileName);
+        product.setCategory(category);
+        Product saveProduct = productService.saveProduct(product);
+        modelAndView.setViewName("redirect:/adminhome");
+        return modelAndView;
+    }
+
 
     @GetMapping("/showFormForUpdate/{id}")
     public  ModelAndView updateImage(@PathVariable("id") Long id){
@@ -84,7 +104,7 @@ public class ProductAdminController {
     @GetMapping("/deleteProduct/{id}")
     public  ModelAndView deleteProduct(@PathVariable("id") Long id){
         productService.deleteProductById(id);
-        modelAndView.setViewName("/redirect:/adminhome");
+        modelAndView.setViewName("redirect:/adminhome");
         return modelAndView;
     }
 
@@ -111,46 +131,26 @@ public class ProductAdminController {
         return modelAndView;
     }
 
+    @GetMapping("/getsingleproduct/{id}")
+    public  ModelAndView getSingleProduct(@PathVariable Long id, HttpSession session){
+        Product findByID = productService.findById(id).get();
+        Product product = findByID;
+        session.setAttribute("product",product);
+        modelAndView.setViewName("/admin/singleproduct");
+        return modelAndView;
+    }
 
-//    //crudstaff
-//
-//    //
-//    @GetMapping("/addProduct")
-//    public ModelAndView viewAddProduct2(){
-//        ProductDto productDto = new ProductDto();
-//        modelAndView.addObject("productDtoAdmin",productDto);
-//        modelAndView.setViewName("/admin/AddProductAdmin");
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/saveOrUpdate")
-//    public  ModelAndView saveP(@ModelAttribute("productDtoAdmin") ProductDto dto){
-//
-//        Optional<Product> optionalProduct = productService.findById(dto.getId());
-//        Product product = null;
-//
-//
-//        String image = "cachua.jpg";
-//        Path path = Paths.get("/assets/img/product/");
-//
-//        if(optionalProduct.isPresent()){
-////            save
-//        }else {
-//            if(!dto.getImage().isEmpty()){
-//                try {
-//                    InputStream inputStream = dto.getImage().getInputStream();
-//                    Files.copy(inputStream,path.resolve(dto.getImage().getOriginalFilename()),
-//                            StandardCopyOption.REPLACE_EXISTING);
-//                    image = dto.getImage().getOriginalFilename().toString();
-//                }catch (Exception e){
-//
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        product = new Product(dto.getId(),dto.getName(),dto.getCurrentQuantity(),dto.getCostPrice(),dto.getSalePrice(),dto.getImage());
-//        productService.saveProduct(product);
-//        modelAndView.setViewName("/redirect:/adminhome");
-//        return modelAndView;
-//    }
+    @GetMapping("/searchproduct")
+    public ModelAndView home(Product product, String keyword) {
+        if(keyword!=null) {
+            List<Product> list = productService.findByKeywordproduct(keyword);
+            modelAndView.addObject("listproduct", list);
+        }else {
+            List<Product> list = productService.getAllProducts();
+            modelAndView.addObject("listproduct", list);}
+        modelAndView.setViewName("/admin/searchproduct");
+        return modelAndView;
+    }
+
+
 }
