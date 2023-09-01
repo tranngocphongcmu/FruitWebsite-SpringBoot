@@ -64,10 +64,8 @@ public class CategoryAdminController {
 
     @PostMapping("/updateCategory/{id}")
     public  ModelAndView editCategoryAdmin(@PathVariable Long id,@ModelAttribute("updatecategoryAdmin") Category category){
-//        ModelAndView modelAndView1 = new ModelAndView("update_category");
 //        category = categoryService.getById(id);
-            category = categoryService.save(category);
-//        modelAndView.addObject("updateCategory",category);
+       category = categoryService.save(category);
         modelAndView.setViewName("redirect:/category");
         return modelAndView;
     }

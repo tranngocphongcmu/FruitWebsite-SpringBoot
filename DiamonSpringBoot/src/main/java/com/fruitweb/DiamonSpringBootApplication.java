@@ -12,7 +12,6 @@ public class DiamonSpringBootApplication {
 
 	public static void main(String[] args) {
 
-		new File(ProductAdminController.uploadDirectory).mkdir();
 
 		SpringApplication.run(DiamonSpringBootApplication.class, args);
 	}

@@ -88,7 +88,7 @@ Body Section
 					<div id="myCarousel" class="carousel slide cntr">
 						<div class="carousel-inner">
 							<div class="item active">
-								<a href="#"> <img src="<c:url value="/assets/img/product/${productdetails.image}"/>" alt="" style="width:100%"></a>
+								<a href="#"> <img src="<c:url value="/resources/uploads/${productdetails.image}"/>" alt="" style="width:100%"></a>
 							</div>
 <%--							<div class="item">--%>
 <%--								<a href="#"> <img src="<c:url value="/assets/img/product/${productdetails.image}"/>" alt="" style="width:100%"></a>--%>

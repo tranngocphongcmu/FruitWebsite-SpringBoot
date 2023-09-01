@@ -50,6 +50,6 @@ public interface IProductService {
 	List<Product> getAllProduct(String keyWord);
 	Page<Product> findPaginated(int pageNo,int pageSize,String sortField,String sortDir);
 
-
+	List<Product> findByKeywordproduct(String keyword);
 
 }

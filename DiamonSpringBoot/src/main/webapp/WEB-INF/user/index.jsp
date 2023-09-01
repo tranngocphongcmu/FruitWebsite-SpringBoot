@@ -184,7 +184,7 @@ New Products
 				  	<li class="span4">
 					  <div class="thumbnail">
 						<a class="zoomTool" href="/chi-tiet-san-pham/${item.id }" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-						<a  href="/chi-tiet-san-pham/${item.id }"><img src="<c:url value="/assets/img/product/${item.image}"/>" alt=""></a>
+						<a  href="/chi-tiet-san-pham/${item.id }"><img src="<c:url value="/resources/uploads/${item.image}"/>" alt=""></a>
 						<div class="caption">
 						  <h5>${item.name}</h5>
 						  <h4>

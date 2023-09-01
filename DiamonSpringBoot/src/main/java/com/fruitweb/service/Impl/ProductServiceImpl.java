@@ -26,27 +26,6 @@ public class ProductServiceImpl implements IProductService {
 	ProductReponsitory productReponsitory;
 
 
-//	@Override
-//	public Product saveProductToDB(Product product, MultipartFile file) {
-//		Product p = new Product();
-//		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//		if(fileName.contains(".."))
-//		{
-//			System.out.println("not a a valid file");
-//		}
-//		try {
-//			p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		p.setDescription(description);
-//
-//		p.setName(name);
-//		p.setPrice(price);
-//
-//		productRepo.save(p);
-//	}
-
 	@Override
 	public Page<Product> findByName(String name, Pageable pageable) {
 		return productReponsitory.findByName(name,pageable);
@@ -173,10 +152,11 @@ public class ProductServiceImpl implements IProductService {
 		return productReponsitory.findAll(pageable);
 	}
 
-//	@Override
-//	public List<Product> findAllByPrice(double costPrice, Pageable pageable) {
-//		return productReponsitory.findAllByPrice(costPrice,pageable);
-//	}
+	@Override
+	public List<Product> findByKeywordproduct(String keyword) {
+		return productReponsitory.findByKeywordproduct(keyword);
+	}
+
 
 
 }

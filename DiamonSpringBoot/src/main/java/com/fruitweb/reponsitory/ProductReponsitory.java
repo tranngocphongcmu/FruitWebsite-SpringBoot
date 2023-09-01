@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.fruitweb.model.Category;
@@ -51,6 +52,11 @@ public interface ProductReponsitory extends JpaRepository<Product, Long> {
 			"p.product_id, p.name, p.description, p.current_quantity, p.cost_price, p.category_id, p.sale_price, p.image, p.is_activated, p.is_deleted " +
 			"from products p where p.is_activated = true and p.is_deleted = false order by rand() limit 9", nativeQuery = true)
 	List<Product> randomProduct();
+
+
+	@Query(value = "select * from products p where p.name like %:keyword%", nativeQuery = true)
+	List<Product> findByKeywordproduct(@Param("keyword") String keyword);
+
 
 }
 
