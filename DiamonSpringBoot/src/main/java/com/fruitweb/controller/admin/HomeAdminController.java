@@ -1,7 +1,6 @@
 package com.fruitweb.controller.admin;
 
 
-import com.fruitweb.model.Category;
 import com.fruitweb.model.Product;
 import com.fruitweb.service.Impl.CategoryServiceImpl;
 import com.fruitweb.service.Impl.ProductServiceImpl;
@@ -14,11 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class AdminHomeController {
+public class HomeAdminController {
 
     @Autowired
     private CategoryServiceImpl categoryService;

@@ -88,22 +88,6 @@ public class CategoryAdminController {
         return modelAndView;
     }
 
-    @GetMapping("/searchcategory/{keySearch}")
-    public ModelAndView searchPagingCategory(@RequestParam String keySearch, @RequestParam("page") Optional<Integer> page){
-        int pageNumber = page.orElse(0);
-        if(pageNumber != 0) {
-            pageNumber = pageNumber - 1;
-        }
-        Pageable pageable = PageRequest.of(pageNumber, 3);
-        Page<Category> categories = categoryService.searchCategoriesByName(keySearch,pageable);
-        modelAndView.addObject("categories", categories);
-        modelAndView.addObject("page", pageNumber);
-        modelAndView.addObject("searchingCategory", categories);
-        modelAndView.addObject("keySearch", keySearch);
-        modelAndView.setViewName("/admin/searchcategory");
-        return modelAndView;
-
-    }
 
     @RequestMapping("/searchct")
     public ModelAndView home(Category category, String keyword) {
